@@ -251,6 +251,7 @@ bestFit: false
 bestFitTitle: undefined
 bestFitNumber: 0
 ```
+
 ***SO*** : Standard Mean Sum Squares regression ***very sensitive to outliers***
 
 
