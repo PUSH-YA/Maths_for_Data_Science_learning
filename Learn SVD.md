@@ -14,6 +14,13 @@ Ex: High resolution images
 
 Basically: most useful cases for Linear algebra *(Matrix decomposition)* & also very **simple** and **interpretable**
 
+##### Extracting patterns:
+1. We can use it to preserve the most dominant factors in data while disregarding the less substantial ones
+2. By keeping only the most significant singular values and their associated singular vectors, you can represent the data using fewer values
+3. the singular values associated with the noise components tend to be smaller compared to the singular values representing the signal. By setting the smaller singular values to zero or removing them, you can suppress the noise and reconstruct a cleaner version of the data.
+4. ***MOST IMPORTANT:*** The singular vectors obtained from SVD can provide insights into the underlying patterns in the data. The columns of the U matrix represent the left singular vectors, which can be interpreted as basis vectors that capture the most significant patterns or modes of variation in the data. These patterns can reveal relationships, clusters, or important features that are inherent in the dataset.
+5. SVD allows you to reconstruct the original data matrix using a subset of singular values and vectors. By retaining only the dominant singular values and their corresponding singular vectors, you can reconstruct an approximation of the original data.
+
 ## Mathematics
 
 Let $$X = \begin{bmatrix}

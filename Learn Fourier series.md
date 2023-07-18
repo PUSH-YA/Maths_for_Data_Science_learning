@@ -1,4 +1,27 @@
 
+## Fourier analysis
+
+It is the chapter 2 of the [data driven science and engineering](https://faculty.washington.edu/sbrunton/databookRL.pdf)
+
+It is one of the most important and ubiquitous transformation in mathematics, physics and engineering. 
+
+Most of our breakthroughs started with a coordinate transformation and Fourier Transformation is a also a coordinate transformation for representing data / images and so on.
+
+
+Fourier derived this transformation as a way of approximating the solution to PDE's
+he was interested in the heat equation $u(x,y,t)$ where $x,y,t$ are position in $x-axis$, $y-axis$ and $time$.  Laplacian operator:
+$$u_{t} = \alpha \nabla^{2}u$$
+* He discovered that the Laplacian operator had eigen values, $\lambda$, and eigen vectors, $\vec{v}$, similar to other linear operators where the eigen vectors are sines and cosines with the fundamental frequency , $\omega_{n}$, determined by the boundary conditions and so on.
+
+Since then it has been used for image compression and other data transformations. In fact $SVD$ can be through of something like Data Driven $FFT$ 
+
+##### Connection between FFT and SVD
+
+1. The FFT transforms a signal from the time domain to the frequency domain, revealing the frequencies present in the signal. Similarly, SVD transforms a data matrix from the data space to a new representation space spanned by the singular vectors. This transformation can unveil underlying patterns and structures in the data.
+2. The FFT provides the amplitude and phase components of different frequencies in a signal. Similarly, the SVD provides the singular values (related to the amplitudes) and the left and right singular vectors (analogous to the phase) associated with the data.
+3. The amplitudes obtained from the FFT can indicate the importance or strength of different frequencies in the signal. Similarly, the singular values obtained from the SVD can represent the importance or relevance of the corresponding singular vectors in the data.
+
+
 ## Fourier series part 1 & 2
 
 #### Part 1
@@ -117,9 +140,139 @@ Uses of FFT:
 - Analysis of data
 - Compression of Audio and images
 
-## Fast Fourier transform (FFT)
+##### Idea of how it works
 
-## Fourier analysis
+So, the time complexity  of FFT is $\theta(n\log(n))$ whereas DFT is $\theta(n^{2})$  
+
+So let's say you have $n = 2^{10}= 1024$ then the computation would be something like $\hat{f} = F_{1024}f$  however we can make this computation lighter as following
+$$\hat{f} = F_{1024}f = \begin{bmatrix}
+I_{512} - D_{512} \\
+I_{512} - D_{512}
+\end{bmatrix}\begin{bmatrix}
+F_{512} & 0 \\
+0 & F_{512}
+\end{bmatrix}\begin{bmatrix}
+f_{even} \\
+f_{odd}
+\end{bmatrix}$$
+where $$D_{512} = \begin{bmatrix}
+1 & 0 & 0 & \dots  & 0 \\
+0 & \omega_{n} & 0 & \dots & 0 \\
+0 & 0 & \omega_{n}^{2} & \dots & 0 \\
+0 & 0 & 0 & \dots & \omega_{n}^{511}
+\end{bmatrix}$$
+* This works because you are reshuffling the half of the rows above and below which is what the above computation is doing to the matrix
+
+This is a lot more efficient because instead of $1024$ matrix, now you have to deal with two $512$ matrix which is more efficient cuz matrix mult is $O(n^2)$
+
+We can split the even and odd further on such as the following
+$$\begin{matrix} \\
+0 & &  0 &  & 0 \\
+1 & &  2 &  & 4\\
+2   &  &4 &  & 8\\
+3  &  & 6 &  & 2\\
+4  &  \to & 8 & \to & 6\\ 
+5  &  & 1 &  & 1\\
+6  &  & 3 &  & 5\\
+7  &  & 5 &  & 3\\
+8  &  & 7 &  & 7\\
+\end{matrix}$$
+
+and basically $F_{1024} \to F_{512} \to F_{256} \to \dots \to F_{4} \to F_{2}$
+Now, you are only left with a $2 \times 2$ matrix which is just 4 numbers and we are basically taking ***advantage of the symmetry in the matrix***
+
+* Symmetric matrices are when $A^{T}= A$
 
 
 
+
+
+
+## Denoising data w/ FFT (Python)
+
+First lets set up the environment
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Create a simple signal with two frequencies
+dt = 0.001
+t = np.arange(0,1,dt)
+f = np.sin(2*np.pi*50*t) + np.sin(2*np.pi*120*t) # sum of 2 freq
+
+f_clean = f
+f = f+2.5*np.random.randn(len(t)) # Add some noise
+
+#plot
+plt.figure(figsize=(13,6))
+plt.plot(t,f,color = 'c', linewidth = 1.5, label = 'Noisy')
+plt.plot(t,f_clean,color = 'k', linewidth = 2, label = 'Clean')
+plt.xlim(t[0], t[-1])
+plt.legend()
+```
+
+![[Pasted image 20230718210624.png]]
+
+First we will compute the FFT, which is straight forward in almost all programming languages
+```python
+## compute the FFT
+n = len(t)
+fhat = np.fft.fft(f,n) # compute the fft
+
+## power spectral density (power bc norm*conj per frequency)
+PSD = fhat * np.conj(fhat) / n # power spectrum
+
+freq = (1/(dt*n)) *np.arange(n) # create x-axis for freq
+L = np.arange(1,np.floor(n/2), dtype = 'int') # only plot the first half
+
+fig,axis = plt.subplots(2,1, figsize = (14,7))
+
+plt.sca(axis[0])
+plt.plot(t,f,color = 'orange', linewidth = 2, label = "Noisy")
+plt.plot(t,f_clean,color = 'blue', linewidth = 2, label = "Clean")
+plt.xlim(t[0], t[-1])
+plt.legend()
+
+plt.sca(axis[1])
+plt.plot(freq[L], PSD[L], color = 'orange', linewidth = 2, label = "Noisy")
+plt.xlim(freq[L[0]], freq[L[-1]])
+plt.legend()
+
+plt.show()
+```
+
+![[Pasted image 20230718212328.png]]
+
+Based on this, we can tell that the power plot has 2 clean peaks: 50hz && 120hz
+
+We can use this to defilter the data and then inverse Fourier transform
+
+$$f \xrightarrow{FFT} \hat{f} \xrightarrow{filter} \hat{f}_{\text{filt}} \xrightarrow{iFFT} f_{\text{filt}}$$
+
+```Python
+### plot EVERYTHING!!!!
+
+fig,axis = plt.subplots(3,1, figsize = (14,7))
+
+plt.sca(axis[0])
+plt.plot(t,f,color = 'orange', linewidth = 2, label = "Noisy")
+plt.plot(t,f_clean,color = 'blue', linewidth = 2, label = "Clean")
+plt.xlim(t[0], t[-1])
+plt.legend()
+
+plt.sca(axis[1])
+plt.plot(freq[L], PSD[L], color = 'orange', linewidth = 2, label = "Noisy")
+plt.xlim(freq[L[0]], freq[L[-1]])
+plt.legend()
+
+plt.sca(axis[2])
+plt.plot(freq[L], PSD[L], color = 'orange', linewidth = 2, label = "Noisy")
+plt.plot(freq[L], PSDClean[L], color = 'blue', linewidth = 1.5, label = "filtered")
+plt.xlim(freq[L[0]], freq[L[-1]])
+plt.legend()
+
+plt.show()
+```
+
+![[Pasted image 20230718213601.png]]
