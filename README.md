@@ -13,8 +13,8 @@ Following contents are recorded in this *Journal*
     - [x]  Advanced PCA
 
 Sneak peek at the content:
-![image](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/1ca105d0-bf78-47af-a2a6-583fa9b32da7)
 
+![image](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/3d72cc18-5c69-4b59-a3cb-48c779cef9e8)
 
         
 - [Learn Fourier Transformation](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/blob/7f7cec8ddc39dd6d63a080530683479828d0be54/Learn%20Fourier%20series.md)
@@ -26,8 +26,8 @@ Sneak peek at the content:
     - [x]  denoising data with FFT
 
  Sneak peek at the content:
-![image](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/89a37369-5ac9-46cc-b83e-58fbf7965dd4)
-
+ 
+![image](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/39a05694-804e-42ba-823c-a19423933fd2)
  
 - [Learn basics of Neural Netowrk](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/blob/7f7cec8ddc39dd6d63a080530683479828d0be54/Learn%20NN.md)
     - [ ]  NN architecture and deep learning
@@ -38,7 +38,8 @@ Sneak peek at the content:
     - [ ]  sparse non-linear dynamics
 
 * These notes are made with the help of [Obsidian](https://obsidian.md/):
-  ![logo](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/03232b31-fe42-4375-bd49-338169ba1da8)
+![logo](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/efd3cc0b-07dc-43ec-bbf8-4b6810bd12c2)
+
   
 These notes are best understood with the help of such Markdown previewing softwares / sites rather than raw GitHub files.
 * HOWEVER, I will still try to reformat the files for better GitHub viewing experience :D
