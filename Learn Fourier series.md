@@ -13,7 +13,7 @@ he was interested in the heat equation $u(x,y,t)$ where $x,y,t$ are position in 
 $$u_{t} = \alpha \nabla^{2}u$$
 * He discovered that the Laplacian operator had eigen values, $\lambda$, and eigen vectors, $\vec{v}$, similar to other linear operators where the eigen vectors are sines and cosines with the fundamental frequency , $\omega_{n}$, determined by the boundary conditions and so on.
 
-Since then it has been used for image compression and other data transformations. In fact $SVD$ can be through of something like Data Driven $FFT$ 
+Since then it has been used for image compression and other data transformations. In fact [[Learn SVD]] can be through of something like Data Driven $FFT$ 
 
 ##### Connection between FFT and SVD
 
