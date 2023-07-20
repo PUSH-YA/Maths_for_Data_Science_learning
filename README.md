@@ -1,4 +1,4 @@
-# Maths for Data Science
+## Maths for Data Science
 My Notetaking for new content learned from Steve Brunton's series on different Data Science topics based on his book: Data Driven Science and Engineering
 This Journaling will help me improve / brush up my linear algebra and statistics as well as get me familiar with the Obsidian note taking system.
 

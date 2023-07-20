@@ -184,10 +184,6 @@ Now, you are only left with a $2 \times 2$ matrix which is just 4 numbers and we
 * Symmetric matrices are when $A^{T}= A$
 
 
-
-
-
-
 ## Denoising data w/ FFT (Python)
 
 First lets set up the environment
