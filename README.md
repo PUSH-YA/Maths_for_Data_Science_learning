@@ -41,13 +41,14 @@ Sneak peek at the content:
 
         
 - [Learn other data driven algorithms and processes](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/blob/7f7cec8ddc39dd6d63a080530683479828d0be54/data%20driven%20algorithms%20and%20coding.md)
-    - [ ]  data driven dynamical systems
-    - [ ]  intro to modelling with matrices and vectors
-    - [ ]  sparse non-linear dynamics
+    - [x]  data driven dynamical systems
+    - [x]  intro to modelling with matrices and vectors -- probabilistic weather model
+    - [ ]  sparse non-linear dynamic
+    - [x] Model Predictive Control (MPC)
 
 * These notes are made with the help of [Obsidian](https://obsidian.md/):
 ![logo](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/efd3cc0b-07dc-43ec-bbf8-4b6810bd12c2)
 
   
-These notes are best understood with the help of such Markdown previewing softwares / sites rather than raw GitHub files.
+These notes are best understood with the help of such Markdown previewing software / sites rather than raw GitHub files.
 * HOWEVER, I will still try to reformat the files for better GitHub viewing experience :D
