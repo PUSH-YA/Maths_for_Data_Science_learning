@@ -59,7 +59,7 @@ This feedback acts sort of like a memory which helps with data where you have to
 ##### Autoencoder
 
 It takes high dimensional data and turns into a small condensed data
-- Can think of ***PCA as a shallow and linear autoencoder***
+- Can think of ***PCA as a shallow and linear autoencoder*** [[Learn SVD]]
 ![[Pasted image 20230720150145.png]]
 
 Since then, we have also discovered how to add more layers in the middle and have ***Deep Autoencoders***
