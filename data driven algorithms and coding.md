@@ -1,4 +1,4 @@
-
+ 
 ## Data driven dynamical systems overview
 
 We will be using machine learning and regression to solve such dynamical systems.
@@ -45,7 +45,66 @@ $$f(x) \to \frac{d}{dt}\phi(x) = \lambda \phi(x)$$
 
 
 
-## Intro to modelling with matrices and vectors
+## Intro to modelling with matrices and vectors  (A probabilistic weather model)
+
+We are going to be modelling weather and we are going to be using 3 states to simplistically model the weather: *cloudy*, *rainy* and *nice*
+
+This is going to have discrete evolution in time. We are going to be modelling it in a deterministic manner where if I know the state of the weather today, I will know the state of the weather tomorrow
+
+So the probabilistic state machine looks as following:
+![[Probabilistic weather model]]
+
+The A matrix is made up of the table of the state today against the probability of the states the next day
+
+$$X_{k+1} = AX_{k} = \begin{bmatrix}
+0.5 & 0.5 & 0.25 \\
+0.25 & 0.5 & 0.25 \\
+0.25 & 0 & 0.5 \\
+\end{bmatrix} \begin{bmatrix}
+\vdots \\
+X_{today} \\
+\vdots
+\end{bmatrix}$$
+which outputs the probability of the things tmrw
+
+We can use code to model this, He shows an example in `MATLAB` but I perfer `python` so I shall use that
+```python
+import numpy as mp
+from matplotlib import pyplot as plt
+
+A = np.array([0.5,0.5,0.25],
+			[0.25,0.5,0.25],
+			[0.25,0,0.5])
+
+X_today = [1,0,0]
+X_tmrw = (A@X_today)
+
+
+weather = np.zeros((50,3))
+
+X_today = np.array([[1],[0],[0]])
+for k in range(50):
+    X_tmrw = A@X_today
+    weather[k] = [i[0] for i in X_tmrw]
+    # print(k)
+    # print(X_tmrw)
+    X_today = X_tmrw
+plt.plot(weather)
+plt.grid(True)
+```
+The above code will fill the weather matrix as following where as following:
+$$\begin{bmatrix}
+P(R, day_{1}) & P(N, day_{1})  & P(C, day_{1}) \\
+P(R, day_{2}) & P(N, day_{2})  & P(C, day_{2}) \\
+P(R, day_{3}) & P(N, day_{3})  & P(C, day_{3}) \\
+\vdots & \vdots & \vdots
+\end{bmatrix}$$
+
+
+![[Pasted image 20230721223655.png]]
+This shows how if we run the probabilites where all the states converge in the long run
+
+* These system can get very complex with large data set and a lot more states
 
 ## Sparse non-linear dynamics
 
