@@ -106,8 +106,6 @@ This shows how if we run the probabilites where all the states converge in the l
 
 * These system can get very complex with large data set and a lot more states
 
-## Sparse non-linear dynamics
-
 ## Model predictive control (MPC)
 
 ##### What MPC does
