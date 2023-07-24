@@ -47,7 +47,7 @@ Sneak peek at the content:
 
 sneak peek at the content:
 
-
+![image](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/541de56a-e88c-46ac-9ec6-e76334147ce9)
 
 * These notes are made with the help of [Obsidian](https://obsidian.md/):
 ![logo](https://github.com/PUSH-YA/Maths_for_Data_Science_learning/assets/91928008/efd3cc0b-07dc-43ec-bbf8-4b6810bd12c2)
